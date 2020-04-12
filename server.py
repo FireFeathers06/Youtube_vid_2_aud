@@ -41,7 +41,7 @@ def youtube_accept():
         for i in s:
             os.remove(download_path+i)
 
-    return static_file(s[0], root=download_path, download=s[0])
+    return static_file(s[1], root=download_path, download=s[1])
 def star():
     run()
 if __name__ == "__main__":
