@@ -33,17 +33,21 @@ def youtube_accept():
     a.join()
     s = os.listdir(path=download_path)
     AudioSegment.from_file(download_path+s[0], 'webm').export(download_path+(s[0].split('.')[0]) + '.mp3', format='mp3')
+    os.remove(download_path+s[0])
     s = os.listdir(path=download_path)
 
     print(s)
     @hook('after_request')
     def delFiles():
-        for i in s:
-            os.remove(download_path+i)
+            os.remove(download_path+s[0])
 
-    return static_file(s[1], root=download_path, download=s[1])
+    return static_file(s[0], root=download_path, download=s[0])
+
+
 def star():
     run()
 if __name__ == "__main__":
+    
+    
     b = Process(target=star)
     b.start()
